@@ -12,6 +12,7 @@
         overflow: hidden;
         background: radial-gradient(circle at center, #000010, #000);
         height: 100vh;
+        width: 100vw;
     }
 
     .falling {
@@ -50,6 +51,28 @@
             opacity: 0;
         }
     }
+
+    /* 🌸 Điều chỉnh kích thước và hiệu ứng cho điện thoại */
+    @media (max-width: 768px) {
+        .text {
+            font-size: 8px;
+            text-shadow: 
+                0 0 2px #ff99ff, 
+                0 0 5px #ff66cc;
+        }
+        .heart {
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .text {
+            font-size: 6px;
+        }
+        .heart {
+            font-size: 12px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -74,10 +97,13 @@ function createFallingElement() {
     el.style.left = Math.random() * 100 + "vw";
     const duration = 3 + Math.random() * 6;
     el.style.animationDuration = duration + "s";
-    el.style.fontSize = 14 + Math.random() * 10 + "px";
     el.style.opacity = 0.7 + Math.random() * 0.3;
 
-    // Thêm màu trái tim ngẫu nhiên
+    // Ngẫu nhiên kích cỡ chữ một chút
+    const size = window.innerWidth < 768 ? (8 + Math.random() * 6) : (12 + Math.random() * 10);
+    el.style.fontSize = size + "px";
+
+    // Màu sắc trái tim ngẫu nhiên
     if (el.classList.contains("heart")) {
         const colors = ["#ff3366", "#ff6699", "#ff99cc", "#ff33cc", "#ff66ff"];
         const color = colors[Math.floor(Math.random() * colors.length)];
@@ -88,8 +114,9 @@ function createFallingElement() {
     setTimeout(() => el.remove(), duration * 1000);
 }
 
-// tăng tốc độ rơi để nhiều hơn
-setInterval(createFallingElement, 100);
+// ⚙️ Điều chỉnh tốc độ sinh phần tử tùy thiết bị
+const interval = window.innerWidth < 768 ? 150 : 100;
+setInterval(createFallingElement, interval);
 </script>
 </body>
 </html>
