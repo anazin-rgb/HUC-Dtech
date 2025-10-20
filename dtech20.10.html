@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Vietnamese Women’s Day - HUC Dtech</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: radial-gradient(circle at center, #000010, #000);
+        height: 100vh;
+    }
+
+    .falling {
+        position: absolute;
+        white-space: nowrap;
+        pointer-events: none;
+        animation: fall linear infinite;
+    }
+
+    .text {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 12px;
+        color: #ff77dd;
+        text-shadow: 
+            0 0 3px #ff99ff, 
+            0 0 7px #ff66cc, 
+            0 0 15px #ff33cc, 
+            0 0 25px #ff99ff;
+    }
+
+    .heart {
+        font-size: 20px;
+        text-shadow: 
+            0 0 5px #ff99cc, 
+            0 0 15px #ff66cc, 
+            0 0 25px #ff3388;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(-10vh);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+<script>
+const text = "Happy Vietnamese Women’s Day - HUC Dtech";
+const hearts = ["❤", "💖", "💕", "💓", "💗", "💘", "💞", "💝"];
+
+function createFallingElement() {
+    const el = document.createElement("div");
+    el.classList.add("falling");
+
+    // Xác suất 60% trái tim, 40% chữ pixel
+    if (Math.random() < 0.6) {
+        el.classList.add("heart");
+        el.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+    } else {
+        el.classList.add("text");
+        el.innerText = text;
+    }
+
+    // Ngẫu nhiên vị trí, kích cỡ, tốc độ
+    el.style.left = Math.random() * 100 + "vw";
+    const duration = 3 + Math.random() * 6;
+    el.style.animationDuration = duration + "s";
+    el.style.fontSize = 14 + Math.random() * 10 + "px";
+    el.style.opacity = 0.7 + Math.random() * 0.3;
+
+    // Thêm màu trái tim ngẫu nhiên
+    if (el.classList.contains("heart")) {
+        const colors = ["#ff3366", "#ff6699", "#ff99cc", "#ff33cc", "#ff66ff"];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        el.style.color = color;
+    }
+
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), duration * 1000);
+}
+
+// tăng tốc độ rơi để nhiều hơn
+setInterval(createFallingElement, 100);
+</script>
+</body>
+</html>
